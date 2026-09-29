@@ -46,4 +46,21 @@ public class NameDayService {
         }
         return responseDTO;
     }
+
+    public NameDaySimpleDTO changeDate(NameDaySimpleDTO requestDTO) {
+        NameDaySimpleDTO responseDTO = null;
+
+        NameDaySimpleModel responseModel = restClient.post()
+                .uri("http://localhost:8081/changeDate")
+                .body(requestDTO)
+                .retrieve()
+                .body(NameDaySimpleModel.class);
+        if (responseModel != null) {
+            responseDTO = new NameDaySimpleDTO(
+                    responseModel.getName(),
+                    responseModel.getDate()
+            );
+        }
+        return responseDTO;
+    }
 }
